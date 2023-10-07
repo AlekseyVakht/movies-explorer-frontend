@@ -1,0 +1,140 @@
+.about-project {
+    background-color: #202020;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    padding: 110px 0 110px;
+    color: white;
+    max-width: 1140px;
+    margin: 0 70px;
+}
+
+.about-project__title {
+    margin: 0 0 23px 0;
+    padding: 0;
+    text-align: left;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26.63px;
+}
+
+.about-project__columns {
+    border-top: 1px solid #DADADA;
+    padding: 70px 0 110px;
+    display: flex;
+    flex-direction: row;
+}
+
+.about-project__column {
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.about-project__column:last-of-type {
+    margin-right: 0;
+}
+
+.about-project__brief {
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24.2px;
+    margin-bottom: 26px;
+    margin: 0 0 26px;
+}
+
+.about-project__main {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+    margin: 0;
+}
+
+.about-project__timeline {
+    display: grid;
+    line-height: 17px;
+    grid-template-columns: minmax(80px, 228px) minmax(184px, 912px);
+    grid-auto-rows: 36px;
+}
+
+.about-project__timeline-cell {
+    background-color: none;
+    color: #8B8B8B;
+    display: flex;
+    justify-content: center;
+}
+
+.about-project__timeline-cell-text {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+.about-project__timeline-cell_grey {
+    background-color: #303030;
+}
+
+.about-project__timeline-cell_green {
+    color: black;
+    background-color: #3DDC84;
+}
+
+@media screen and (max-width: 768px){
+    .about-project{
+        margin: 0 50px;
+        max-width: 668px;
+        padding: 90px 0;
+    }
+
+    .about-project__column{
+        margin-right: 30px;
+    }
+
+    .about-project__brief{
+        font-size: 20px;
+        line-height: 24px;
+        margin: 0 0 22px;
+    }
+
+    .about-project__main{
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 620px){
+    .about-project{
+        padding: 70px 0 69px;
+    }
+    .about-project__columns{
+        padding-bottom: 60px;
+    }
+
+    .about-project__column{
+        margin: 0 0 56px 0;
+    }
+
+    .about-project__brief{
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0 0 16px;
+    }
+
+    .about-project__main{
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .about-project__columns{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .about-project{
+        min-width: 292px;
+        margin: 0 18px;
+    }
+}

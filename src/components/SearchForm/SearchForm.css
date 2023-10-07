@@ -1,0 +1,114 @@
+.search-form{
+    max-width: 1140px;
+    padding-top: 70px;
+    margin: 0 70px;
+}
+
+.search-form__form{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    grid-template-areas: 
+    'search'
+    'small-films';
+    margin-bottom: 69px;
+}
+
+.search-form__input{
+    padding-left: 63px;
+    color: white;
+    border: 0;
+    min-height: 72px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+    border-radius: 10px;
+    background-color: #2F2F2F;
+    background-image: url('../../images/search-icon.svg');
+    background-repeat: no-repeat;
+    background-position: left 20px center;
+    background-size: 34px 34px;
+    grid-area: search;
+}
+
+.search-form__input:focus {
+    outline: none;
+}
+
+.search-form__submit-btn{
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: white;
+    border: 0;
+    background-color: transparent;
+    background-image: url('../../images/search-btn.svg');
+    width: 58.65px;
+    height: 34px;
+    grid-area: search;
+    margin-right: 227px;
+    justify-self: end;
+}
+
+.search-form__stroke{
+    border: 0;
+    height: 40px;
+    width: 1px;
+    background-color: #424242;
+    grid-area: search;
+    margin: 0 207px 0 0;
+    justify-self: end;
+}
+
+.search-form__bottom-line{
+    border-bottom: 1px solid #424242;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px){
+    .search-form{
+        margin: 0 30px 0;
+        padding: 80px 0 0;
+    }
+
+    .search-form__form{
+        margin-bottom: 109px;
+    }
+}
+
+@media screen and (max-width: 650px){
+    .search-form__stroke{
+        width: 0;
+        height: 0;
+    }
+
+    .search-form__form{
+        margin-bottom: 0;
+    }
+
+    .search-form__submit-btn{
+        margin: 0 19px 0 0;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .search-form{
+        margin: 0 10px 11px;
+    }
+
+    .search-form__input{
+        font-size: 14px;
+        background-image: none;
+        padding-left: 19px;
+    }
+
+    .search-form__form{
+        max-width: 300px;
+    }
+}

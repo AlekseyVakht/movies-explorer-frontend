@@ -1,0 +1,95 @@
+.nav__links-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    color: white;
+}
+
+.nav__links-container_justify_end{
+   justify-content: flex-end;
+   font-weight: 500;
+}
+
+.nav__links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav__profile{
+    width: 100px;
+    height: 32px;
+    border-radius: 40px;
+    box-shadow: 0 3px 14px 0 rgba(0,0,0,0.02);
+    color: white;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav__link {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    margin-right: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav__link_margin{
+    margin-right: 30px;
+}
+
+.nav__link:last-of-type{
+    margin-right: 0;
+}
+
+.nav__link_active{
+    font-weight: 500;
+}
+
+.nav__link-text{
+    margin: 0;
+    padding: 0;
+}
+
+.nav__link_green {
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+    background-color: #3DDC84;
+    color: black;
+}
+
+.nav__profile-text{
+    margin: 0;
+}
+
+.nav__profile-icon{
+    background-image: url('../../images/profile-icon.svg');
+    width: 26px;
+    height: 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #313131;
+    border-radius: 50%;
+    margin: 3px 3px 3px 7px;
+}
+
+@media screen and (max-width: 320px){
+    .nav__link_margin{
+        margin-right: 14px;
+    }
+}
