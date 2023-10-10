@@ -21,7 +21,6 @@
 .burger-menu__btn{
     border: 0;
     background-color: transparent;
-    align-self: flex-end;
     width: 44px;
     height: 44px;
     background-image: url('../../images/burger-icon.svg');
@@ -69,6 +68,11 @@
     color: white;
     text-align: center;
     margin-bottom: 28px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: center;
   }
 
   .burger-menu__link:last-of-type{
@@ -116,5 +120,28 @@
 @media screen and (max-width: 320px){
     .burger-menu__container{
         width: 100%;
+    }
+
+    .burger-menu__btn{
+      width: 40px;
+      height: 43px;
+      background-size: 40px 43px;
+    }
+
+    .burger-menu__close-icon{
+      top: 18px;
+      right: 18px;
+    }
+
+    .burger-menu__links{
+      margin: 144px 0 0;
+    }
+
+    .burger-menu__link{
+      margin-bottom: 24px;
+    }
+
+    .burger-menu__profile{
+      margin: 0 auto 49px;
     }
 }

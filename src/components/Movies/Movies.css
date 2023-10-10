@@ -1,19 +1,6 @@
 .movies{
     max-width: 1140px;
-}
-
-.movies__more{
-    margin: 50px auto 80px;
-}
-
-.movies__more-btn{
-    border: 0;
-    border-radius: 6px;
-    width: 320px;
-    height: 36px;
-    background-color: #2F2F2F;
-    color: white;
-    cursor: pointer;
+    font-family: inherit;
 }
 
 @media screen and (max-width: 320px){

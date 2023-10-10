@@ -7,7 +7,7 @@ function MoviesCard({card}){
     const activePage = useLocation();
 
     const saveMovieButtonClassName=(
-        `movies-card__save-btn ${isSaved && 'movies-card__save-btn_active'}`
+        `movies-card__save-btn ${isSaved ? 'movies-card__save-btn_active' : ''}`
     );
 
     const deleteMovieButtonClassName=('movies-card__delete-btn');
@@ -25,13 +25,15 @@ function MoviesCard({card}){
 
     return(
         <li className="movies-card__element">
-            <img className="movies-card__image" src={card.link} alt="film"/>
-            <div className="movies-card__save-container">
-                <p className="movies-card__description">{card.name}</p>
-                {activePage.pathname === '/movies' && <button type="button" className={saveMovieButtonClassName} onClick={handleSave}></button>}
-                {activePage.pathname === '/saved-movies' && <button type="button" className={deleteMovieButtonClassName} onClick={handleDelete}></button>}
+            <div className="movies-card__container">
+                <img className="movies-card__image" src={card.link} alt="Обложка фильма"/>
+                <div className="movies-card__save-container">
+                    <p className="movies-card__description">{card.name}</p>
+                    {activePage.pathname === '/movies' && <button type="button" className={saveMovieButtonClassName} onClick={handleSave}></button>}
+                    {activePage.pathname === '/saved-movies' && <button type="button" className={deleteMovieButtonClassName} onClick={handleDelete}></button>}
+                </div>
             </div>
-        <p className="movies-card__duration">1ч42мин</p>
+        <p className="movies-card__duration">1ч 42м</p>
     </li>
     )
 }

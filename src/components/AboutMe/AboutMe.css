@@ -18,6 +18,7 @@
     font-weight: 400;
     font-size: 22px;
     line-height: 26.63px;
+    letter-spacing: -0.04em;
     border-bottom: 1px solid #DADADA;
 }
 
@@ -49,6 +50,7 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 20px;
+    letter-spacing: 0;
     margin: 0 0 26px;
     padding: 0;
 }
@@ -57,6 +59,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
+    letter-spacing: 0;
     margin: 0;
 }
 
@@ -67,60 +70,20 @@
 }
 
 .about-me__git-link {
+    font-family: inherit;
     font-size: 14px;
     font-weight: 500;
     line-height: 17px;
+    letter-spacing: -0.04em;
     text-align: bottom;
     text-decoration: none;
     color: white;
+    transition: opacity .3s ease-in;
+    opacity: 1;
 }
 
-.about-me__portfolio{
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: left;
-    color: #8B8B8B;
-    margin: 0;
-    padding: 100px 0 50px;
-}
-
-.about-me__portfolio-links-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-
-}
-
-.about-me__portfolio-link{
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 50px;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-decoration: none;
-}
-
-.about-me__portfolio-links-list-item:first-of-type {
-    padding: 0 0 20px;
-    border-bottom: 1px solid #424242;
-}
-
-.about-me__portfolio-links-list-item {
-    padding: 20px 0 20px;
-    border-bottom: 1px solid #424242;
-}
-
-.about-me__portfolio-links-list-item:last-of-type {
-    border-bottom: none;
-}
-
-.about-me__portfolio-link-arrow {
-    width: 29px;
-    height: 60px;
+.about-me__git-link:hover{
+    opacity: .7;
 }
 
 @media screen and (max-width: 768px){
@@ -156,17 +119,13 @@
         width: 255px;
         height: 307px;
     }
-
-    .about-me__portfolio-link{
-        font-size: 28px;
-    }
-
-    .about-me__portfolio-link-arrow{
-        width: 27px;
-    }
 }
 
 @media screen and (max-width: 600px){
+    .about-me__main{
+        max-width: 364px;
+    }
+    
     .about-me__name{
         font-size: 30px;
         line-height: 36px;
@@ -199,14 +158,20 @@
 }   
 
 @media screen and (max-width: 320px){
-    .about-me__portfolio-link{
-        font-size: 18px;
-        line-height: 28px;
-    }
-    
     .about-me{
         max-width: 292px;
-        margin: 0 14px;
+        margin: 0 auto;
+        padding: 70px 0;
+    }
+
+    .about-me__title{
+        font-size: 18px;
+        line-height: 21.78px;
+        padding-bottom: 28px;
+    }
+
+    .about-me__info{
+        padding: 60px 0 0;
     }
 
     .about-me__avatar{
@@ -214,9 +179,8 @@
         height: 352px;
     }
 
-    .about-me__portfolio-link-arrow{
-        width: 18px;
-        height: 28px;
+    .about-me__name{
+        padding: 0;
     }
 }
 

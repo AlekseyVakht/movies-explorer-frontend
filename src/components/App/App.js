@@ -28,6 +28,8 @@ function App() {
         setFooterActive(true);
       } else if (activePage.pathname === "/profile")
       {
+        setLoggedIn(true);
+        setHeaderActive(true);
         setFooterActive(false);
       } else if (activePage.pathname === "/")
       {
@@ -45,11 +47,7 @@ function App() {
 
   return (
     <div className="root">
-      {isHeaderActive && 
-      <Header 
-      loggedIn={loggedIn}
-      >
-      </Header>}
+      {isHeaderActive && <Header loggedIn={loggedIn}/>}
       <Routes>
           <Route 
           path="/"
@@ -94,7 +92,7 @@ function App() {
               }
             />
       </Routes>
-      {isFooterActive && <Footer></Footer>}
+      {isFooterActive && <Footer/>}
     </div>
   );
 }

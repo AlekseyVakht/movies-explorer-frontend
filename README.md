@@ -9,6 +9,8 @@
 **Ссылка на Github:** https://github.com/AlekseyVakht/movies-explorer-api
 
 ## Ссылки на проект
+Макет - dark-1
+
 IP  158.160.117.33  
 
 Backend  https://api.moviesexplorer.avakht.nomoredomainsicu.ru 

@@ -4,7 +4,7 @@ import './AboutProject.css';
 function AboutProject() {
     return(
         <section className="about-project">
-            <h1 className="about-project__title">О проекте</h1>
+            <p className="about-project__title">О проекте</p>
             
             <div className="about-project__columns">
                 <div className="about-project__column">
@@ -25,10 +25,10 @@ function AboutProject() {
                     <p className="about-project__timeline-cell-text">4 недели</p>
                 </div>
                 <div className="about-project__timeline-cell">
-                    <p className="about-project__timeline-cell-text">Back-end</p>
+                    <p className="about-project__timeline-cell-text about-project__timeline-cell-text_grey">Back-end</p>
                 </div>
                 <div className="about-project__timeline-cell">
-                    <p className="about-project__timeline-cell-text">Front-end</p>
+                    <p className="about-project__timeline-cell-text about-project__timeline-cell-text_grey">Front-end</p>
                 </div>
             </div>
         </section>
