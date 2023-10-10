@@ -38,6 +38,12 @@
     text-align: center;
     color: #4285F4;
     text-decoration: none;
+    transition: opacity .3s ease;
+    opacity: 1;
+}
+
+.not-found__return:hover{
+    opacity: .7;
 }
 
 @media screen and (max-width: 768px) {

@@ -48,6 +48,12 @@
     border: 0;
     cursor: pointer;
     background-image: url('../../images/save-icon-disable.svg');
+    transition: opacity .3s ease;
+    opacity: 1;
+}
+
+.movies-card__save-btn:hover{
+    opacity: .8;
 }
 
 .movies-card__save-btn_active{
@@ -62,6 +68,12 @@
     border: 0;
     cursor: pointer;
     background-image: url('../../images/delete-icon.svg');
+    transition: opacity .3s ease;
+    opacity: 1;
+}
+
+.movies-card__delete-btn:hover{
+    opacity: .8;
 }
 
 .movies-card__duration{

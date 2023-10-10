@@ -65,7 +65,7 @@
 }
 
 .profile__edit-form-input:focus{
-    outline: none;
+    outline: 1px solid #4285F4;
 }
 
 .profile__edit-form-input_no-border{
@@ -178,6 +178,12 @@
 
     .profile__name {
         margin: 0 0 96px;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .profile__input-container{
+        max-width: 260px;
     }
 }
 

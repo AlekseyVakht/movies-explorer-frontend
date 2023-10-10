@@ -6,10 +6,10 @@ import cards from '../../utils/cards';
 
 function Movies(){
     return(
-        <>
+        <main>
         <SearchForm />
         <MoviesCardList cards={cards}/>
-        </>
+        </main>
     )
 }
 

@@ -48,6 +48,11 @@
 
 .portfolio__links-list-item:last-of-type {
     border-bottom: none;
+    padding: 20px 0 0;
+}
+
+.portfolio__links-list-item:first-of-type{
+    padding: 0 0 19px;
 }
 
 .portfolio__link-arrow {
@@ -91,13 +96,5 @@
     .portfolio__header{
         margin: 70px 0 40px;
         font-size: 14px;
-    }
-
-    .portfolio__links-list-item{
-        padding: 20px 0 19px;
-    }
-
-    .portfolio__list-item:first-of-type{
-        padding: 0 0 19px;
     }
 }

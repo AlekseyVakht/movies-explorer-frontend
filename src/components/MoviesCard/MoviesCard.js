@@ -28,7 +28,7 @@ function MoviesCard({card}){
             <div className="movies-card__container">
                 <img className="movies-card__image" src={card.link} alt="Обложка фильма"/>
                 <div className="movies-card__save-container">
-                    <p className="movies-card__description">{card.name}</p>
+                    <h2 className="movies-card__description">{card.name}</h2>
                     {activePage.pathname === '/movies' && <button type="button" className={saveMovieButtonClassName} onClick={handleSave}></button>}
                     {activePage.pathname === '/saved-movies' && <button type="button" className={deleteMovieButtonClassName} onClick={handleDelete}></button>}
                 </div>

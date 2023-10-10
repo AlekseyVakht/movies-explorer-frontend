@@ -7,10 +7,10 @@ import savedCards from '../../utils/savedcards';
 function SavedMovies(){
 
     return(
-        <>
+        <main>
         <SearchForm />
         <MoviesCardList cards={savedCards}/>
-        </>
+        </main>
     )
 }
 

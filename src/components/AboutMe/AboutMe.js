@@ -19,7 +19,7 @@ function AboutMe() {
                             После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы. 
                         </p>
                     </div>
-                    <a href="https://github.com/AlekseyVakht" className="about-me__git-link">Github</a>
+                    <a href="https://github.com/AlekseyVakht" className="about-me__git-link" target="_blank" rel="noopener noreferrer">Github</a>
                 </div>
                 <img className="about-me__avatar" src={avatarPath} alt="Аватар"/>
             </div>

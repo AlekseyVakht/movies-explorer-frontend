@@ -37,60 +37,62 @@ function Profile(){
     }
 
     return(
-        <section className="profile">
-            <div className="profile__align-container">
-                <h1 className="profile__name">Привет, {initialValues.name}!</h1>
-                    <form className="profile__edit-form" id="profile-form" name="profile-form" onSubmit={handleSubmit} noValidate>
-                        <div className="profile__input-container">
-                            <label className="profile__edit-form-label" htmlFor="name">Имя</label>
-                            <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            className="profile__edit-form-input" 
-                            value={formValues.name} 
-                            placeholder='Ваше имя...' 
-                            onChange={handleChange}
-                            minLength={2} 
-                            maxLength={30}
-                            disabled={isDisabled}
-                            required
-                            ></input>
-                        </div>
-                        <div className="profile__input-container">
-                            <label className="profile__edit-form-label" htmlFor="email">E-mail</label>
-                            <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            className="profile__edit-form-input" 
-                            value={formValues.email} 
-                            placeholder='Ваш e-mail...' 
-                            onChange={handleChange}
-                            minLength={2} 
-                            maxLength={30}
-                            disabled={isDisabled}
-                            required
-                            ></input>
-                        </div>
-                    </form>
-            </div>
-            <div className="profile__buttons">
-                <>
-                    { isSubmitButtonActive ?
+        <main>   
+            <section className="profile">
+                <div className="profile__align-container">
+                    <h1 className="profile__name">Привет, {initialValues.name}!</h1>
+                        <form className="profile__edit-form" id="profile-form" name="profile-form" onSubmit={handleSubmit} noValidate>
+                            <div className="profile__input-container">
+                                <label className="profile__edit-form-label" htmlFor="name">Имя</label>
+                                <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                className="profile__edit-form-input" 
+                                value={formValues.name} 
+                                placeholder='Ваше имя...' 
+                                onChange={handleChange}
+                                minLength={2} 
+                                maxLength={30}
+                                disabled={isDisabled}
+                                required
+                                ></input>
+                            </div>
+                            <div className="profile__input-container">
+                                <label className="profile__edit-form-label" htmlFor="email">E-mail</label>
+                                <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                className="profile__edit-form-input" 
+                                value={formValues.email} 
+                                placeholder='Ваш e-mail...' 
+                                onChange={handleChange}
+                                minLength={2} 
+                                maxLength={30}
+                                disabled={isDisabled}
+                                required
+                                ></input>
+                            </div>
+                        </form>
+                </div>
+                <div className="profile__buttons">
                     <>
-                        <span className="profile__input-error">{formErrors.profile}</span> 
-                        <button type="submit" className='profile__submit-btn' form="profile-form">Сохранить</button>
+                        { isSubmitButtonActive ?
+                        <>
+                            <span className="profile__input-error">{formErrors.profile}</span> 
+                            <button type="submit" className='profile__submit-btn' form="profile-form">Сохранить</button>
+                        </>
+                        : 
+                        <>
+                            <button type="button" className="profile__edit-btn" onClick={handleClick}>Редактировать</button>
+                            <NavLink to ="/" type="button" className="profile__signout-btn">Выйти из аккаунта</NavLink>
+                        </>
+                        }
                     </>
-                    : 
-                    <>
-                        <button type="button" className="profile__edit-btn" onClick={handleClick}>Редактировать</button>
-                        <NavLink to ="/" type="button" className="profile__signout-btn">Выйти из аккаунта</NavLink>
-                    </>
-                    }
-                </>
-            </div>
-        </section>
+                </div>
+            </section>
+        </main>
     )
 }
 

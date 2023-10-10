@@ -36,6 +36,7 @@
 
 .search-form__input:focus {
     outline: none;
+    box-shadow: 0 3px 14px 0 rgba(0, 0, 0, .2);
 }
 
 .search-form__submit-btn{
@@ -53,8 +54,15 @@
     width: 58.65px;
     height: 34px;
     grid-area: search;
-    margin-right: 227px;
+    margin-right: 258px;
     justify-self: end;
+    transition: opacity .3s ease;
+    opacity: 1;
+    z-index: 1;
+}
+
+.search-form__submit-btn:hover{
+    opacity: .8;
 }
 
 .search-form__stroke{

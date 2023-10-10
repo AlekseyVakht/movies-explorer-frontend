@@ -25,6 +25,13 @@
     background-image: url('../../images/logo.svg');
     width: 38px;
     height: 38px;
+    cursor: pointer;
+    transition: opacity .3s ease;
+    opacity: 1;
+}
+
+.form__logo:hover{
+    opacity: .8;
 }
 
 .form__header{
@@ -81,10 +88,6 @@
     margin-bottom: 42px;
 }
 
-.form__input-container:last-of-type{
-    margin-bottom: 83px;
-}
-
 .form__input:focus{
     outline: none;
     border-color: #4285F4;
@@ -112,6 +115,11 @@
     transition: opacity .3s ease-in;
     opacity: 1;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
 }
 
 .form__submit-btn:hover{
