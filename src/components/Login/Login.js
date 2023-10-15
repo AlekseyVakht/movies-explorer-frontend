@@ -1,73 +1,86 @@
-import { React, useState } from 'react';
-import './Login.css';
-import Form from '../Forms/Form';
+import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import Form from "../Forms/Form";
+import * as Auth from "../../utils/Auth";
 
-function Login(){
-    const initialValues = { email: '', password: ''};
-    const [formValues, setFormValues] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState({});
+function Login(props) {
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
 
-    function handleChange(e){
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    function onSubmit(e){
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-    }
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
 
-    const validate = (values) => {
-        const errors = {};
-        if (!values.email) {
-            errors.email = 'Необходимо ввести email';
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    Auth.authorize(formValue.email, formValue.password)
+      .then((data) => {
+        if (data.token) {
+          setFormValue({ email: "", password: "" });
+          props.handleLogin();
+          navigate("/", { replace: true });
         }
-        if (!values.password) {
-            errors.password = 'Необходимо ввести пароль';
-        }
-        return errors;
-    }
+      })
+      .catch((err) => console.log(err));
+  };
 
-    return(
-        <Form
-        header='Рады видеть!'
-        text='Еще не зарегистрированы?'
-        link='Регистрация'
-        path='/signup'
-        btn='Войти'
-        isLoginForm={true}
-        submit={onSubmit}
-        >
-        <div className="form__input-container">
-            <label className="form__label" htmlFor="email">E-mail</label>
-            <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            value={formValues.email}
-            className="form__input" 
-            placeholder='Введите email'
-            onChange={handleChange}
-            required></input>
-            <span className="form__input-error">{formErrors.email}</span>
-        </div>
+  return (
+    <Form
+      header="Рады видеть!"
+      text="Еще не зарегистрированы?"
+      link="Регистрация"
+      path="/signup"
+      btn="Войти"
+      isLoginForm={true}
+      submit={handleSubmit}
+    >
+      <div className="form__input-container">
+        <label className="form__label" htmlFor="email">
+          E-mail
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formValue.email}
+          className="form__input"
+          placeholder="Введите email"
+          onChange={handleChange}
+          required
+        ></input>
+        {/* <span className="form__input-error">{formErrors.email}</span> */}
+      </div>
 
-        <div className="form__input-container form__input-container_margin-bottom_42px">
-            <label className="form__label" htmlFor="password">Пароль</label>
-            <input 
-            type="password" 
-            id="password" 
-            name="password"
-            value={formValues.password}
-            className="form__input"
-            placeholder='Введите пароль'
-            autoComplete='off'
-            onChange={handleChange}
-            required></input>
-            <span className="form__input-error">{formErrors.password}</span>
-        </div>
-        </Form>
-    )
+      <div className="form__input-container form__input-container_margin-bottom_42px">
+        <label className="form__label" htmlFor="password">
+          Пароль
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formValue.password}
+          className="form__input"
+          placeholder="Введите пароль"
+          autoComplete="off"
+          onChange={handleChange}
+          required
+        ></input>
+        {/* <span className="form__input-error">{formErrors.password}</span> */}
+      </div>
+    </Form>
+  );
 }
 
 export default Login;

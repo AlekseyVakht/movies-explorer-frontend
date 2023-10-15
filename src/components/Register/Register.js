@@ -1,99 +1,110 @@
-import { React, useState } from 'react';
-import './Register.css';
-import Form from '../Forms/Form';
+import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Register.css";
+import Form from "../Forms/Form";
+import * as Auth from "../../utils/Auth";
 
-function Register(){
-    const initialValues = { name: '', email: '', password: ''};
-    const [formValues, setFormValues] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState({});
+function Register() {
+  const [formValue, setFormValue] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
-    function handleChange(e){
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
 
-    function onSubmit(e){
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-    }
-
-    const validate = (values) => {
-        const errors = {};
-        if (!values.name) {
-            errors.name = 'Необходимо ввести Ваше имя';
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    Auth.register(formValue.name, formValue.email, formValue.password)
+      .then((res) => {
+        navigate("/signin", { replace: true });
+        if (res.error) {
+          //   props.handleInfoTooltipOpen({
+          //     text: "Что-то пошло не так! Попробуйте ещё раз.",
+          //     img: registerFailed,
+          //   });
+          navigate("/signup", { replace: true });
+          formValue.name = "";
+          formValue.email = "";
+          formValue.password = "";
         }
-        if (!values.email) {
-            errors.email = 'Необходимо ввести email';
-        }
+      })
+      .catch((err) => console.log(err));
+  };
 
-        if (!values.password) {
-            errors.password = 'Необходимо ввести пароль';
-        } else if (values.password.length < 8) {
-            errors.password = 'Пароль не может быть меньше 8 символов';
-        } 
+  return (
+    <Form
+      header="Добро пожаловать!"
+      text="Уже зарегистрированы?"
+      link="Войти"
+      path="/signin"
+      btn="Зарегистрироваться"
+      submit={handleSubmit}
+    >
+      <div className="form__input-container">
+        <label className="form__label" htmlFor="name">
+          Имя
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formValue.name || ''}
+          className="form__input"
+          placeholder="Введите Ваше имя"
+          minLength={2}
+          maxLength={30}
+          onChange={handleChange}
+          required
+        ></input>
+        {/* <span className="form__input-error">{formErrors.name}</span> */}
+      </div>
 
-        return errors;
-    }
+      <div className="form__input-container">
+        <label className="form__label" htmlFor="email">
+          E-mail
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formValue.email || ''}
+          className="form__input"
+          placeholder="Введите email"
+          onChange={handleChange}
+          required
+        ></input>
+        {/* <span className="form__input-error">{formErrors.email}</span> */}
+      </div>
 
-    return (
-        <Form
-        header='Добро пожаловать!'
-        text='Уже зарегистрированы?'
-        link='Войти'
-        path='/signin'
-        btn='Зарегистрироваться'
-        submit={onSubmit}
-        >
-        <div className="form__input-container">
-            <label className="form__label" htmlFor="name">Имя</label>
-            <input 
-            type="text" 
-            id="name" 
-            name="name"
-            value={formValues.name}
-            className="form__input" 
-            placeholder='Введите Ваше имя'
-            minLength={2} 
-            maxLength={30} 
-            onChange={handleChange}
-            required></input>
-            <span className="form__input-error">{formErrors.name}</span>
-        </div>
-
-        <div className="form__input-container">
-            <label className="form__label" htmlFor="email">E-mail</label>
-            <input 
-            type="email" 
-            id="email" 
-            name="email"
-            value={formValues.email}
-            className="form__input"
-            placeholder='Введите email'
-            onChange={handleChange}
-            required></input>
-            <span className="form__input-error">{formErrors.email}</span>
-        </div>
-
-        <div className="form__input-container form__input-container_margin-bottom_83px">
-            <label className="form__label" htmlFor="password">Пароль</label>
-            <input 
-            type="password" 
-            id="password" 
-            name="password" 
-            value={formValues.password}
-            className="form__input"
-            placeholder='Введите пароль'
-            autoComplete='off'
-            minLength={8} 
-            maxLength={20}
-            onChange={handleChange}
-            required
-            ></input>
-            <span className="form__input-error">{formErrors.password}</span>
-        </div>
-
-        </Form>
-    )
+      <div className="form__input-container form__input-container_margin-bottom_83px">
+        <label className="form__label" htmlFor="password">
+          Пароль
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formValue.password || ''}
+          className="form__input"
+          placeholder="Введите пароль"
+          autoComplete="off"
+          minLength={8}
+          maxLength={20} 
+          onChange={handleChange}
+          required
+        ></input>
+        {/* <span className="form__input-error">{formErrors.password}</span> */}
+      </div>
+    </Form>
+  );
 }
 
 export default Register;

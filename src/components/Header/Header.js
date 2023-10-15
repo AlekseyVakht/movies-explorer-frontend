@@ -32,7 +32,7 @@ function Header({ loggedIn }) {
                     <img className="header__logo-image" src={logoPath} alt="Лого"/>
                 </NavLink>
                 {
-                (window.innerWidth <= 768 && loggedIn) ?
+                (windowSize <= 768 && loggedIn) ?
                 <NavTab></NavTab>
                 :
                 <Navigation loggedIn={loggedIn}/>
