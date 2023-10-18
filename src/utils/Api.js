@@ -95,8 +95,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "http://localhost:3000",
-  // baseUrl: "https://api.moviesexplorer.avakht.nomoredomainsicu.ru",
+  baseUrl: "https://api.moviesexplorer.avakht.nomoredomainsicu.ru",
   headers: {
     "Content-Type": "application/json",
   },
