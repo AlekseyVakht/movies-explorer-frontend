@@ -118,7 +118,7 @@ function App() {
   }
 
   function signOut() {
-    localStorage.clear();
+    localStorage.clear()
     setCurrentUser({});
     setLoggedIn(false);
     navigate("/signin", { replace: true });
