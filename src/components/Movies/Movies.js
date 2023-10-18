@@ -33,10 +33,10 @@ function Movies({ handleSave, savedMovies }) {
   const [shownCards, setShownCards] = useState(DISPLAY_CARD_WIDTH_LARGE);
 
   const requestFilmApi = () => {
+    setIsLoading(true);
     return getAllMovies()
       .then((res) => {
         setAllMovies(res);
-        setIsLoading(true);
         localStorage.setItem("allMovies", JSON.stringify(res));
         return res;
       })
