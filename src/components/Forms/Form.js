@@ -18,9 +18,6 @@ function Form(props){
                     </form>
                 </div>    
                 <div className={formFooterClassName}>
-                <span className="form__input-error">
-                  {props.message}
-                </span>
                     <button type="submit" className="form__submit-btn" form="form" disabled={!props.valid}>{props.btn}</button>
                     <div className="form__footer-link-container">
                         <p className="form__text">{props.text}</p>
