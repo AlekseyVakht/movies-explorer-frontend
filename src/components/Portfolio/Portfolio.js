@@ -13,13 +13,13 @@ function Portfolio(){
                     </a>
                 </li>
                 <li className="portfolio__links-list-item">
-                    <a href="https://github.com/AlekseyVakht/russian-travel" className="portfolio__link" target="_blank" rel="noopener noreferrer">
+                    <a href="https://alekseyvakht.github.io/russian-travel" className="portfolio__link" target="_blank" rel="noopener noreferrer">
                         <p className="portfolio__link-text">Адаптивный сайт</p>
                         <div className="portfolio__link-arrow"></div>
                     </a>
                 </li>
                 <li className="portfolio__links-list-item">
-                    <a href="https://github.com/AlekseyVakht/react-mesto-api-full-gha" className="portfolio__link" target="_blank" rel="noopener noreferrer">
+                    <a href="https://alekseyvakht.github.io/mesto" className="portfolio__link" target="_blank" rel="noopener noreferrer">
                         <p className="portfolio__link-text">Одностраничное приложение</p>
                         <div className="portfolio__link-arrow"></div>
                     </a>

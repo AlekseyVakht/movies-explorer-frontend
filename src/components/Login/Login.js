@@ -5,25 +5,25 @@ import Form from "../Forms/Form";
 import * as Auth from "../../utils/Auth";
 
 function Login(props) {
+  const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
   });
+  const [formErrors, setFormErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
-
-  const navigate = useNavigate();
+  function handleChange(e) {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    setFormValue({ ...formValue, [name]: value });
+    setFormErrors({ ...formErrors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     Auth.authorize(formValue.email, formValue.password)
       .then((data) => {
         if (data.token) {
@@ -43,6 +43,7 @@ function Login(props) {
       path="/signup"
       btn="Войти"
       isLoginForm={true}
+      valid={isValid}
       submit={handleSubmit}
     >
       <div className="form__input-container">
@@ -59,7 +60,7 @@ function Login(props) {
           onChange={handleChange}
           required
         ></input>
-        {/* <span className="form__input-error">{formErrors.email}</span> */}
+        <span className="form__input-error">{formErrors.email}</span>
       </div>
 
       <div className="form__input-container form__input-container_margin-bottom_42px">
@@ -77,7 +78,7 @@ function Login(props) {
           onChange={handleChange}
           required
         ></input>
-        {/* <span className="form__input-error">{formErrors.password}</span> */}
+        <span className="form__input-error">{formErrors.password}</span>
       </div>
     </Form>
   );

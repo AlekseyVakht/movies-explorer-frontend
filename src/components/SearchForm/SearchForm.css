@@ -80,6 +80,12 @@
     margin: 0 auto 10px;
 }
 
+.search-form__error{
+    color: dimgray;
+    text-align: left;
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 768px){
     .search-form{
         width: 92.1875%;

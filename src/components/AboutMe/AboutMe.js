@@ -10,13 +10,12 @@ function AboutMe() {
             <div className="about-me__info">
                 <div className="about-me__main">
                     <div className="about-me__info-text">
-                        <h2 className="about-me__name">Виталий</h2>
-                        <h3 className="about-me__profession">Фронтенд-разработчик, 30 лет</h3>
+                        <h2 className="about-me__name">Алексей</h2>
+                        <h3 className="about-me__profession">Фронтенд-разработчик, 25 лет</h3>
                         <p className="about-me__text">
-                            Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. 
-                            Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. 
-                            С 2015 года работал в компании «СКБ Контур». 
-                            После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы. 
+                            Я из Санкт-Петербурга! Мне 25 лет, имею высшее образование, но я всегда стараюсь стремиться к чему-то новому, поэтому в один момент задумался о том,
+                            что могу стать стать фронтенд-разработчиком, ведь это действительно интересно и увлекательно!
+                            
                         </p>
                     </div>
                     <a href="https://github.com/AlekseyVakht" className="about-me__git-link" target="_blank" rel="noopener noreferrer">Github</a>

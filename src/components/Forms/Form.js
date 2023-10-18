@@ -4,6 +4,7 @@ import './Form.css';
 
 function Form(props){
     const formFooterClassName = (`${props.isLoginForm ? 'form__footer-login' : 'form__footer'}`);
+
     return(
         <main>
             <section className="form">
@@ -17,7 +18,7 @@ function Form(props){
                     </form>
                 </div>    
                 <div className={formFooterClassName}>
-                    <button type="submit" className="form__submit-btn" form="form">{props.btn}</button>
+                    <button type="submit" className="form__submit-btn" form="form" disabled={!props.valid}>{props.btn}</button>
                     <div className="form__footer-link-container">
                         <p className="form__text">{props.text}</p>
                         <NavLink to={props.path} className="form__link">{props.link}</NavLink>

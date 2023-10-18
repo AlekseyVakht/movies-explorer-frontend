@@ -67,6 +67,7 @@
     width: 270px;
     height: 327px;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 .about-me__git-link {

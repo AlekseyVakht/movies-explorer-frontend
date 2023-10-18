@@ -12,18 +12,12 @@ class Api {
     }
   }
 
+  //Profile
   getUserInfoApi(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         authorization: `Bearer ${token}`,
-      },
-    }).then((res) => this._isResOk(res));
-  }
-
-  getSavedMovies(token) {
-    return fetch(`${this._baseUrl}/movies`, {
-      headers: {
-        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     }).then((res) => this._isResOk(res));
   }
@@ -42,9 +36,9 @@ class Api {
     }).then((res) => this._isResOk(res));
   }
 
-  deleteMovieApi(_id, token) {
-    return fetch(`${this._baseUrl}/movies/${_id}`, {
-      method: "DELETE",
+  //Movies
+  getSavedMovies(token) {
+    return fetch(`${this._baseUrl}/movies`, {
       headers: {
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -52,14 +46,51 @@ class Api {
     }).then((res) => this._isResOk(res));
   }
 
-  changeMovieLikeApi(_id, isLiked, token) {
+  deleteMovieApi(_id, token) {
     return fetch(`${this._baseUrl}/movies/${_id}`, {
-      method: isLiked ? "DELETE" : "PUT",
+      method: "DELETE",
       headers: {
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({_id: _id})
     }).then((res) => this._isResOk(res));
+  }
+
+  changeSaveStatus(movieData, isSave, token) {
+    if (isSave) {
+      return fetch(`${this._baseUrl}/movies/${movieData._id}`, {
+        method: "DELETE",
+        body: JSON.stringify({_id: movieData._id}),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      .then((res) => this._isResOk(res));
+    } else {
+      return fetch(`${this._baseUrl}/movies`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          movieId: movieData.id,
+          nameRU: movieData.nameRU,
+          nameEN: movieData.nameEN,
+          director: movieData.director,
+          country: movieData.country,
+          year: movieData.year,
+          duration: movieData.duration,
+          description: movieData.description,
+          trailerLink: movieData.trailerLink,
+          image: `https://api.nomoreparties.co${movieData.image.url}`,
+          thumbnail: `https://api.nomoreparties.co${movieData.image.formats.thumbnail.url}`,
+        }),
+      })
+      .then((res) => this._isResOk(res));
+    }
   }
 }
 

@@ -5,6 +5,8 @@
     grid-area: search;
     align-items: center;
     justify-content: flex-end;
+    max-width: 400px;
+    justify-self: flex-end;
 }
 
 .filter-checkbox__input{

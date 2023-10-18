@@ -122,6 +122,12 @@
     text-align: center;
 }
 
+.form__submit-btn:disabled{
+    pointer-events: none;
+    background-color: dimgray;
+    color: grey;
+}
+
 .form__submit-btn:hover{
     opacity: .8;
 }

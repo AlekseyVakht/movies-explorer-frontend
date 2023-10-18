@@ -1,29 +1,14 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
+
 import './Header.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import Navigation from "../Navigation/Navigation";
 import NavTab from "../NavTab/NavTab";
 import logoPath from '../../images/logo.svg'
 
-function Header({ loggedIn }) {
-    const [windowSize, setWindowSize] = useState(getWindowSize());
+function Header({ loggedIn, windowSize }) {
     const activePage = useLocation();
     const headerClassName = (`header ${activePage.pathname === "/" ? 'header_color' : ''}`)
-
-    useEffect(() => {
-      function handleWindowResize() {
-        setWindowSize(getWindowSize());
-      }
-      window.addEventListener('resize', handleWindowResize);
-      return () => {
-        window.removeEventListener('resize', handleWindowResize);
-      };
-    }, []);
-
-    function getWindowSize() {
-        const {innerWidth} = window;
-        return {innerWidth};
-      }
 
     return (
         <header className={headerClassName}>

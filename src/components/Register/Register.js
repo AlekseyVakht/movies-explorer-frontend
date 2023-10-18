@@ -5,20 +5,24 @@ import Form from "../Forms/Form";
 import * as Auth from "../../utils/Auth";
 
 function Register() {
+  const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
+  const [formErrors, setFormErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+  function handleChange(e) {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    setFormValue({ ...formValue, [name]: value });
+    setFormErrors({ ...formErrors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+    console.log(isValid);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,10 +30,6 @@ function Register() {
       .then((res) => {
         navigate("/signin", { replace: true });
         if (res.error) {
-          //   props.handleInfoTooltipOpen({
-          //     text: "Что-то пошло не так! Попробуйте ещё раз.",
-          //     img: registerFailed,
-          //   });
           navigate("/signup", { replace: true });
           formValue.name = "";
           formValue.email = "";
@@ -47,6 +47,7 @@ function Register() {
       path="/signin"
       btn="Зарегистрироваться"
       submit={handleSubmit}
+      valid={isValid}
     >
       <div className="form__input-container">
         <label className="form__label" htmlFor="name">
@@ -56,7 +57,7 @@ function Register() {
           type="text"
           id="name"
           name="name"
-          value={formValue.name || ''}
+          value={formValue.name || ""}
           className="form__input"
           placeholder="Введите Ваше имя"
           minLength={2}
@@ -64,7 +65,7 @@ function Register() {
           onChange={handleChange}
           required
         ></input>
-        {/* <span className="form__input-error">{formErrors.name}</span> */}
+        <span className="form__input-error">{formErrors.name}</span>
       </div>
 
       <div className="form__input-container">
@@ -75,13 +76,13 @@ function Register() {
           type="email"
           id="email"
           name="email"
-          value={formValue.email || ''}
+          value={formValue.email || ""}
           className="form__input"
           placeholder="Введите email"
           onChange={handleChange}
           required
         ></input>
-        {/* <span className="form__input-error">{formErrors.email}</span> */}
+        <span className="form__input-error">{formErrors.email}</span>
       </div>
 
       <div className="form__input-container form__input-container_margin-bottom_83px">
@@ -92,16 +93,16 @@ function Register() {
           type="password"
           id="password"
           name="password"
-          value={formValue.password || ''}
+          value={formValue.password || ""}
           className="form__input"
           placeholder="Введите пароль"
           autoComplete="off"
           minLength={8}
-          maxLength={20} 
+          maxLength={20}
           onChange={handleChange}
           required
         ></input>
-        {/* <span className="form__input-error">{formErrors.password}</span> */}
+        <span className="form__input-error">{formErrors.password}</span>
       </div>
     </Form>
   );

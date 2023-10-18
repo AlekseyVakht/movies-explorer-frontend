@@ -43,6 +43,10 @@
     display: none;
 }
 
+.movies-list_error{
+    color: dimgray;
+}
+
 @media screen and (max-width: 1279px){
     .movies-list__container{
         justify-content: center;
