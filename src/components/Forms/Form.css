@@ -141,6 +141,16 @@
     text-align: center;
 }
 
+.form__input-error{
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 13px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #FF004C;
+    margin-bottom: 20px;
+}
+
 .form__link{
     font-size: 14px;
     font-weight: 500;

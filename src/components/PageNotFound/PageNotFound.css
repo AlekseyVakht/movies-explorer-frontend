@@ -40,6 +40,8 @@
     text-decoration: none;
     transition: opacity .3s ease;
     opacity: 1;
+    border: 0;
+    background-color: transparent;
 }
 
 .not-found__return:hover{

@@ -68,7 +68,7 @@ function SearchForm({
         >
           Найти
         </button>
-        <FilterCheckbox handleToggle={handleToggle} />
+        <FilterCheckbox handleToggle={handleToggle} isToggleActive={isToggleActive}/>
         {isErr && (
         <div className="search-form__error">
           {"Нужно ввести ключевое слово"}

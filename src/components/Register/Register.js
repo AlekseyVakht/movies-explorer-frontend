@@ -1,11 +1,18 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import Form from "../Forms/Form";
 import * as Auth from "../../utils/Auth";
 
-function Register() {
+function Register(props) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (props.loggedIn) {
+        navigate('/movies');
+    }
+}, [props.loggedIn, navigate]);
+
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -13,6 +20,8 @@ function Register() {
   });
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [errorName, setErrorName] = useState('');
 
   function handleChange(e) {
     const target = e.target;
@@ -21,22 +30,32 @@ function Register() {
     setFormValue({ ...formValue, [name]: value });
     setFormErrors({ ...formErrors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
-    console.log(isValid);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     Auth.register(formValue.name, formValue.email, formValue.password)
-      .then((res) => {
-        navigate("/signin", { replace: true });
-        if (res.error) {
-          navigate("/signup", { replace: true });
-          formValue.name = "";
-          formValue.email = "";
-          formValue.password = "";
+      .then(() => {
+        setIsDisabled(true);
+        Auth.authorize(formValue.email, formValue.password)
+        .then((res) => {
+          if (res.token) {
+            props.handleLogin();
+            navigate("/movies", { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(err)}
+          );
+      })
+      .catch((err) => {
+        console.log(err)
+        if (err === 'Ошибка 409'){
+          setErrorName('Пользователь с таким email уже зарегистрирован. Попробуйте другой email.');
+        } else if (err === 'Ошибка 400') {
+          setErrorName('Проверьте правильность введенных данных');
         }
       })
-      .catch((err) => console.log(err));
   };
 
   return (
@@ -48,6 +67,8 @@ function Register() {
       btn="Зарегистрироваться"
       submit={handleSubmit}
       valid={isValid}
+      isDisabled={isDisabled}
+      message={errorName}
     >
       <div className="form__input-container">
         <label className="form__label" htmlFor="name">
@@ -63,6 +84,7 @@ function Register() {
           minLength={2}
           maxLength={30}
           onChange={handleChange}
+          disabled={isDisabled}
           required
         ></input>
         <span className="form__input-error">{formErrors.name}</span>
@@ -80,6 +102,7 @@ function Register() {
           className="form__input"
           placeholder="Введите email"
           onChange={handleChange}
+          disabled={isDisabled}
           required
         ></input>
         <span className="form__input-error">{formErrors.email}</span>
@@ -100,6 +123,7 @@ function Register() {
           minLength={8}
           maxLength={20}
           onChange={handleChange}
+          disabled={isDisabled}
           required
         ></input>
         <span className="form__input-error">{formErrors.password}</span>

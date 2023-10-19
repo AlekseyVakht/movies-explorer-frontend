@@ -42,12 +42,15 @@
     cursor: pointer;
 }
 
+.filter-checkbox__switch-on{
+    background-image: url('../../images/smalltumb.svg');
+}
+
 .filter-checkbox__switch:hover{
     opacity: .8;
 }
 
 .filter-checkbox__input:checked + span {
-    background: url('../../images/smalltumb.svg');
 }
 
 .filter-checkbox__label{

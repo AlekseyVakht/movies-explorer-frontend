@@ -8,12 +8,12 @@ function Profile(props) {
   const [isDisabled, setDisabled] = useState(true);
   const [isSubmitButtonActive, setSubmitButtonActive] = useState(false);
 
-  const [formValue, setFormValue] = useState({name: '', email: ''});
+  const [formValue, setFormValue] = useState({});
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    setFormValue({name: currentUser.name, email:currentUser.email})
+    setFormValue({name: currentUser.name, email: currentUser.email})
   }, [currentUser])
 
   function handleClick() {
@@ -30,9 +30,6 @@ function Profile(props) {
     setIsValid(target.closest("form").checkValidity());
   }
 
-  function handleSignOut() {
-    props.onSignOut();
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -44,7 +41,12 @@ function Profile(props) {
     setDisabled(true);
   }
 
+  function handleSignOut() {
+    props.onSignOut();
+  }
+
   return (
+
     <main>
       <section className="profile">
         <div className="profile__align-container">
@@ -65,7 +67,7 @@ function Profile(props) {
                 id="name"
                 name="name"
                 className="profile__edit-form-input"
-                defaultValue={formValue.name}
+                defaultValue={formValue.name || ''}
                 placeholder="Ваше имя..."
                 onChange={handleChange}
                 minLength={2}
@@ -83,7 +85,7 @@ function Profile(props) {
                 id="email"
                 name="email"
                 className="profile__edit-form-input"
-                defaultValue={formValue.email}
+                defaultValue={formValue.email || ''}
                 placeholder="Ваш e-mail..."
                 onChange={handleChange}
                 minLength={2}

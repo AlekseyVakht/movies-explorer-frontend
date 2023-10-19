@@ -6,13 +6,17 @@ import { SHORT_MOVIE_DURATION } from "../../utils/constants";
 
 function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
   const [searchError, setSearchError] = useState("");
-  const [isToggleActive, setIsToggleActive] = useState(false);
+  const [isToggleActive, setIsToggleActive] = useState(
+    localStorage.getItem("isToggleActive") === "true"
+  );
   const [filtredSavedMovies, setFiltredSavedMovies] = useState([]);
-  const [localQuery, setLocalQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem("searchQuery") || ""
+  );
 
   useEffect(() => {
     setFiltredSavedMovies(savedMovies);
-    searchSavedMovies(localQuery, isToggleActive);
+    searchSavedMovies(searchQuery, isToggleActive);
   }, [savedMovies]);
 
   const searchSavedMovies = (localQuery, isToggleActive) => {
@@ -27,11 +31,16 @@ function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
     } else {
       setFiltredSavedMovies(results);
     }
+    if (filtredSavedMovies.length) {
+      setSearchError("");
+    } else {
+      setSearchError("Ничего не найдено");
+    }
   };
 
   const handleToggle = () => {
     setIsToggleActive((prev) => !prev);
-    searchSavedMovies(localQuery, !isToggleActive);
+    searchSavedMovies(searchQuery, !isToggleActive);
   };
 
   const filterShortMovies = (arrayMovies) => {
@@ -40,7 +49,7 @@ function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
   };
 
   const handleSearchButton = (text, isToggleActive) => {
-    setLocalQuery(text);
+    setSearchQuery(text);
     searchSavedMovies(text, isToggleActive);
   };
 
@@ -50,15 +59,14 @@ function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
         handleSearchButton={handleSearchButton}
         isToggleActive={isToggleActive}
         handleToggle={handleToggle}
-        setSearchQuery={setLocalQuery}
-        searchQuery={localQuery}
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
         setSearchError={setSearchError}
       />
       <MoviesCardList
         handleSave={handleSave}
         savedMovies={filtredSavedMovies}
         searchError={searchError}
-        isToggleActive={isToggleActive}
         handleMovieDelete={handleMovieDelete}
       />
     </main>

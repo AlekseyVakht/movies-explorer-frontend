@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Form from "../Forms/Form";
@@ -6,12 +6,21 @@ import * as Auth from "../../utils/Auth";
 
 function Login(props) {
   const navigate = useNavigate();
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (props.loggedIn) {
+        navigate('/movies');
+    }
+}, [props.loggedIn, navigate]);
+
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [errorName, setErrorName] = useState('');
 
   function handleChange(e) {
     const target = e.target;
@@ -26,13 +35,19 @@ function Login(props) {
     e.preventDefault();
     Auth.authorize(formValue.email, formValue.password)
       .then((data) => {
+        setIsDisabled(true);
         if (data.token) {
           setFormValue({ email: "", password: "" });
           props.handleLogin();
-          navigate("/", { replace: true });
+          navigate("/movies", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        if (err === 'Ошибка 400') {
+          setErrorName('Проверьте правильность введенных данных');
+        }
+      })
   };
 
   return (
@@ -45,6 +60,8 @@ function Login(props) {
       isLoginForm={true}
       valid={isValid}
       submit={handleSubmit}
+      isDisabled={isDisabled}
+      message={errorName}
     >
       <div className="form__input-container">
         <label className="form__label" htmlFor="email">
@@ -58,6 +75,7 @@ function Login(props) {
           className="form__input"
           placeholder="Введите email"
           onChange={handleChange}
+          disabled={isDisabled}
           required
         ></input>
         <span className="form__input-error">{formErrors.email}</span>
@@ -76,6 +94,7 @@ function Login(props) {
           placeholder="Введите пароль"
           autoComplete="off"
           onChange={handleChange}
+          disabled={isDisabled}
           required
         ></input>
         <span className="form__input-error">{formErrors.password}</span>

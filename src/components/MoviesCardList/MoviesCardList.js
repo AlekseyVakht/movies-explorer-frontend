@@ -15,16 +15,14 @@ function MoviesCardList({
   const location = useLocation();
 
   useEffect(() => {
-      if (location.pathname === "/saved-movies") {
-          setToRender(savedMovies.slice(0, shownCards));
-      } else if (location.pathname === "/movies") {
-          if (shownMovies.length) {
-            setToRender(shownMovies.slice(0, shownCards));
-            
-          } 
+    if (location.pathname === "/saved-movies") {
+      setToRender(savedMovies.slice(0, shownCards));
+    } else if (location.pathname === "/movies") {
+      if (shownMovies.length) {
+        setToRender(shownMovies.slice(0, shownCards));
       }
-
-  }, [shownCards, shownMovies, savedMovies, location.pathname])
+    }
+  }, [shownCards, shownMovies, savedMovies, location.pathname]);
 
   return (
     <section className="movies-list">

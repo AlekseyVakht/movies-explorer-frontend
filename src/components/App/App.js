@@ -14,6 +14,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
+import Info from "../Info/Info";
 
 //utils
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -32,10 +33,13 @@ function App() {
   const [windowSize, setWindowSize] = useState(getWindowSize());
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token"));
-  const [isInit, setIsInit] = useState(false);
- 
+
   const [isHeaderActive, setHeaderActive] = useState(false);
   const [isFooterActive, setFooterActive] = useState(false);
+
+  const [infoText, setInfoText] = useState("");
+
+  const [isOpened, setIsOpened] = useState(false);
 
   const activePage = useLocation();
   const navigate = useNavigate();
@@ -66,7 +70,7 @@ function App() {
               setLoggedIn(true);
               Promise.all([
                 api.getUserInfoApi(localStorage.token),
-                api.getSavedMovies(localStorage.token)
+                api.getSavedMovies(localStorage.token),
               ])
                 .then(([user, savedList]) => {
                   setCurrentUser(user);
@@ -74,16 +78,14 @@ function App() {
                 })
                 .catch((err) => {
                   console.log(err);
-                })
+                });
             }
           })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            setIsInit(true);
-          })
+          .catch((err) => console.log(err));
       }
     },
-    [navigate], [loggedIn],
+    [navigate],
+    [loggedIn],
     [activePage, isFooterActive],
     [activePage, isHeaderActive]
   );
@@ -103,14 +105,31 @@ function App() {
     return { innerWidth };
   }
 
+  //InfoTool
+  function handleClose() {
+    setIsOpened(false);
+  }
+
   //User
   function handleUpdateUser({ name, email }) {
     api
       .patchProfile({ name, email }, localStorage.token)
       .then((userData) => {
         setCurrentUser(userData);
+        setInfoText("Успешно");
+        setIsOpened(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsOpened(true);
+        if (err === "Ошибка: 409") {
+          setInfoText("Пользователь с таким email уже зарегистрирован.");
+        } else if (err === "Ошибка: 500") {
+          setInfoText("Проблемы на сервере. Повторите попытку позже.");
+        } else if (err === "Ошибка: 400") {
+          setInfoText("Неверно переданы данные");
+        }
+      });
   }
 
   function handleLogin() {
@@ -118,42 +137,47 @@ function App() {
   }
 
   function signOut() {
-    localStorage.clear()
+    localStorage.clear();
     setCurrentUser({});
     setLoggedIn(false);
     navigate("/signin", { replace: true });
   }
-
 
   //Movies
   function handleMovieDelete(movie) {
     api
       .deleteMovieApi(movie._id, localStorage.token)
       .then(() => {
-        setSavedMovies(prevMovies => prevMovies.filter(i => i._id !== movie._id))
+        setSavedMovies((prevMovies) =>
+          prevMovies.filter((i) => i._id !== movie._id)
+        );
       })
       .catch((err) => console.log(err));
   }
 
   function handleSave(movieCard) {
-    if (!savedMovies.some(i => i.movieId === movieCard.id)) {
-      api.changeSaveStatus(movieCard, false, localStorage.token)
-        .then(res => {
-          setSavedMovies(prevMovies => [res, ...prevMovies]);
+    if (!savedMovies.some((i) => i.movieId === movieCard.id)) {
+      api
+        .changeSaveStatus(movieCard, false, localStorage.token)
+        .then((res) => {
+          setSavedMovies((prevMovies) => [res, ...prevMovies]);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     } else {
-      const deletedMovie = savedMovies.find(i => i.movieId === movieCard.id);
+      const deletedMovie = savedMovies.find((i) => i.movieId === movieCard.id);
       if (deletedMovie && deletedMovie._id) {
-        api.changeSaveStatus(deletedMovie, true, localStorage.token)
+        api
+          .changeSaveStatus(deletedMovie, true, localStorage.token)
           .then(() => {
-            setSavedMovies(prevMovies => prevMovies.filter(i => i.movieId !== movieCard.id));
+            setSavedMovies((prevMovies) =>
+              prevMovies.filter((i) => i.movieId !== movieCard.id)
+            );
           })
-          .catch(err => { 
+          .catch((err) => {
             console.log(err);
-          })
+          });
       }
     }
   }
@@ -161,54 +185,59 @@ function App() {
   return (
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
-            {isHeaderActive && (
-              <Header loggedIn={loggedIn} windowSize={window.innerWidth} />
-            )}
-            <Routes>
-              <Route path="/" element={<Main loggedIn={loggedIn} />} />
-              <Route
-                path="/movies"
-                element={
-                  <ProtectedRouteElement
-                    element={Movies}
-                    savedMovies={savedMovies}
-                    handleSave={handleSave}
-                    loggedIn={loggedIn}
-                  />
-                }
+        {isOpened && (
+          <Info text={infoText} onClose={handleClose} isOpen={isOpened} />
+        )}
+        {isHeaderActive && (
+          <Header loggedIn={loggedIn} windowSize={window.innerWidth} />
+        )}
+        <Routes>
+          <Route path="/" element={<Main loggedIn={loggedIn} />} />
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRouteElement
+                element={Movies}
+                savedMovies={savedMovies}
+                handleSave={handleSave}
+                loggedIn={loggedIn}
               />
-              <Route
-                path="/saved-movies"
-                element={
-                  <ProtectedRouteElement
-                    element={SavedMovies}
-                    savedMovies={savedMovies}
-                    handleSave={handleSave}
-                    handleMovieDelete={handleMovieDelete}
-                    loggedIn={loggedIn}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRouteElement
+                element={SavedMovies}
+                savedMovies={savedMovies}
+                handleSave={handleSave}
+                handleMovieDelete={handleMovieDelete}
+                loggedIn={loggedIn}
               />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRouteElement
-                    element={Profile}
-                    onUpdateUser={handleUpdateUser}
-                    onSignOut={signOut}
-                    loggedIn={loggedIn}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRouteElement
+                element={Profile}
+                onUpdateUser={handleUpdateUser}
+                onSignOut={signOut}
+                loggedIn={loggedIn}
               />
-              <Route path="/signup" element={<Register />} />
-              <Route
-                path="/signin"
-                element={<Login handleLogin={handleLogin} />}
-              />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-            {isFooterActive && <Footer />}
-
+            }
+          />
+          <Route
+            path="/signup"
+            element={<Register handleLogin={handleLogin} loggedIn={loggedIn} />}
+          />
+          <Route
+            path="/signin"
+            element={<Login handleLogin={handleLogin} loggedIn={loggedIn} />}
+          />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        {isFooterActive && <Footer />}
       </CurrentUserContext.Provider>
     </div>
   );
