@@ -150,7 +150,7 @@ function Movies({ handleSave, savedMovies, isSaved }) {
   }, [shownCards]);
 
   function handleMoreButton() {
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= DISPLAY_WIDTH_MEDIUM) {
       setShownCards(shownCards + DISPLAY_CARD_COUNTER_WIDTH_MORE_768);
     } else {
       setShownCards(shownCards + DISPLAY_CARD_COUNTER_WIDTH_LESS_768);
