@@ -1,25 +1,21 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import { HOUR_DURATION_IN_MIN } from "../../utils/constants";
 
-function MoviesCard({ card, savedMovies, handleSave, handleMovieDelete }) {
+function MoviesCard({ card, savedMovies, handleSave, handleMovieDelete}) {
   const location = useLocation();
-  const [isSaved, setIsSaved] = useState(false);
 
-  useEffect(() => {
-      setIsSaved(location.pathname === "/movies" ? savedMovies.some((i) => i.movieId === card.id) : true);
-  }, [savedMovies, location.pathname, card.id]);
+  const isSaved = savedMovies.some((i) => i.movieId === card.id)
 
   const handleButtonClick = () => {
     if (location.pathname === "/saved-movies") {
       handleMovieDelete(card);
     } else {
       handleSave(card);
-      setIsSaved(!isSaved);
     }
   };
-
+  
   const moviePicture =
     location.pathname === "/movies"
       ? `https://api.nomoreparties.co${card.image.url}`

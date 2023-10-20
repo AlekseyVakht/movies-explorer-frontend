@@ -40,13 +40,14 @@ function App() {
   const [infoText, setInfoText] = useState("");
 
   const [isOpened, setIsOpened] = useState(false);
+  
+  const [isUpdated, setIsUpdated] = useState(true);
 
   const activePage = useLocation();
   const navigate = useNavigate();
 
   useEffect(
     () => {
-      const jwt = localStorage.getItem("token");
       if (
         activePage.pathname === "/movies" ||
         activePage.pathname === "/saved-movies"
@@ -63,6 +64,14 @@ function App() {
         setHeaderActive(false);
         setFooterActive(false);
       }
+    },
+    [activePage, isFooterActive],
+    [activePage, isHeaderActive]
+  );
+
+  useEffect(
+    () => {
+      const jwt = localStorage.getItem("token");
       if (jwt) {
         Auth.checkToken(jwt)
           .then((res) => {
@@ -85,9 +94,7 @@ function App() {
       }
     },
     [navigate],
-    [loggedIn],
-    [activePage, isFooterActive],
-    [activePage, isHeaderActive]
+    [loggedIn]
   );
 
   useEffect(() => {
@@ -112,6 +119,7 @@ function App() {
 
   //User
   function handleUpdateUser({ name, email }) {
+    setIsUpdated(false);
     api
       .patchProfile({ name, email }, localStorage.token)
       .then((userData) => {
@@ -129,7 +137,8 @@ function App() {
         } else if (err === "Ошибка: 400") {
           setInfoText("Неверно переданы данные");
         }
-      });
+      })
+      .finally(() => setIsUpdated(true));
   }
 
   function handleLogin() {
@@ -160,7 +169,7 @@ function App() {
       api
         .changeSaveStatus(movieCard, false, localStorage.token)
         .then((res) => {
-          setSavedMovies((prevMovies) => [res, ...prevMovies]);
+            setSavedMovies((prevMovies) => [res, ...prevMovies]);
         })
         .catch((err) => {
           console.log(err);
@@ -171,10 +180,9 @@ function App() {
         api
           .changeSaveStatus(deletedMovie, true, localStorage.token)
           .then(() => {
-            setSavedMovies((prevMovies) =>
-              prevMovies.filter((i) => i.movieId !== movieCard.id)
-            );
-          })
+              setSavedMovies((prevMovies) =>
+                prevMovies.filter((i) => i.movieId !== movieCard.id))
+            })
           .catch((err) => {
             console.log(err);
           });
@@ -223,6 +231,7 @@ function App() {
                 element={Profile}
                 onUpdateUser={handleUpdateUser}
                 onSignOut={signOut}
+                isUpdated={isUpdated}
                 loggedIn={loggedIn}
               />
             }

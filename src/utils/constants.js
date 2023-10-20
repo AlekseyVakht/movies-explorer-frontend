@@ -14,3 +14,7 @@ export const SHORT_MOVIE_DURATION = 40;
 
 //Time Params
 export const HOUR_DURATION_IN_MIN = 60;
+
+//Regex
+export const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+export const NAME_REGEX = /^[A-Za-zА-Яа-яЁё\s-]{2,}$/;

@@ -6,18 +6,22 @@ import { SHORT_MOVIE_DURATION } from "../../utils/constants";
 
 function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
   const [searchError, setSearchError] = useState("");
-  const [isToggleActive, setIsToggleActive] = useState(
-    localStorage.getItem("isToggleActive") === "true"
-  );
-  const [filtredSavedMovies, setFiltredSavedMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem("searchQuery") || ""
-  );
+  const [isToggleActive, setIsToggleActive] = useState(false);
+  const [filtredSavedMovies, setFiltredSavedMovies] = useState(savedMovies);
+  const [localQuery, setLocalQuery] = useState("");
 
   useEffect(() => {
     setFiltredSavedMovies(savedMovies);
-    searchSavedMovies(searchQuery, isToggleActive);
+    searchSavedMovies(localQuery, isToggleActive);
   }, [savedMovies]);
+
+  useEffect(() => {
+    if (filtredSavedMovies.length) {
+      setSearchError("");
+    } else {
+      setSearchError("Ничего не найдено");
+    }
+  },[filtredSavedMovies])
 
   const searchSavedMovies = (localQuery, isToggleActive) => {
     let results = savedMovies.filter(
@@ -31,25 +35,22 @@ function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
     } else {
       setFiltredSavedMovies(results);
     }
-    if (filtredSavedMovies.length) {
-      setSearchError("");
-    } else {
-      setSearchError("Ничего не найдено");
-    }
   };
 
   const handleToggle = () => {
     setIsToggleActive((prev) => !prev);
-    searchSavedMovies(searchQuery, !isToggleActive);
+    searchSavedMovies(localQuery, !isToggleActive);
   };
 
   const filterShortMovies = (arrayMovies) => {
-    const results = arrayMovies.filter((movie) => movie.duration <= SHORT_MOVIE_DURATION);
+    let results = arrayMovies.filter(
+      (movie) => movie.duration <= SHORT_MOVIE_DURATION
+    );
     return results;
   };
-
+  
   const handleSearchButton = (text, isToggleActive) => {
-    setSearchQuery(text);
+    setLocalQuery(text);
     searchSavedMovies(text, isToggleActive);
   };
 
@@ -59,8 +60,8 @@ function SavedMovies({ savedMovies, handleSave, handleMovieDelete }) {
         handleSearchButton={handleSearchButton}
         isToggleActive={isToggleActive}
         handleToggle={handleToggle}
-        setSearchQuery={setSearchQuery}
-        searchQuery={searchQuery}
+        setSearchQuery={setLocalQuery}
+        searchQuery={localQuery}
         setSearchError={setSearchError}
       />
       <MoviesCardList

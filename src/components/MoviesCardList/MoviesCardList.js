@@ -10,6 +10,7 @@ function MoviesCardList({
   handleSave,
   shownCards,
   handleMovieDelete,
+  isSaved
 }) {
   const [toRender, setToRender] = useState([]);
   const location = useLocation();

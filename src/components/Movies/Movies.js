@@ -15,7 +15,7 @@ import {
 } from "../../utils/constants";
 import { getAllMovies } from "../../utils/MovieApi";
 
-function Movies({ handleSave, savedMovies }) {
+function Movies({ handleSave, savedMovies, isSaved }) {
   const [isLoading, setIsLoading] = useState(false);
   const [foundMovies, setFoundMovies] = useState([]);
   const [isToggleActive, setIsToggleActive] = useState(
@@ -127,7 +127,7 @@ function Movies({ handleSave, savedMovies }) {
         setSearchError("Ничего не найдено");
       }
     }
-  }, [shownMovies, searchQuery]);
+  }, [shownMovies, searchQuery, shownMovies]);
 
   useEffect(() => {
     localStorage.setItem("foundMovies", JSON.stringify(foundMovies));
