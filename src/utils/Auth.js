@@ -1,5 +1,5 @@
-// const baseUrl = "https://api.moviesexplorer.avakht.nomoredomainsicu.ru";
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://api.moviesexplorer.avakht.nomoredomainsicu.ru";
+// const baseUrl = "http://localhost:3000";
 
 function checkResponse(res) {
     if (res.ok) {
