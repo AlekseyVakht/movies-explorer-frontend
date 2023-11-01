@@ -1,0 +1,10 @@
+.movies{
+    max-width: 1140px;
+    font-family: inherit;
+}
+
+@media screen and (max-width: 320px){
+    .movies__more-btn{
+        width: 240px;
+    }
+}

@@ -1,0 +1,187 @@
+.about-me {
+    max-width: 1140px;
+    background-color: #202020;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    padding: 110px 0 125px;
+    color: white;
+    text-align: left;
+    margin: 0 70px;
+    max-width: 1140px;
+}
+
+.about-me__title {
+    margin: 0;
+    padding: 0 0 23px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26.63px;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid #DADADA;
+}
+
+.about-me__info-text {
+    max-width: 600px;
+}
+
+.about-me__info {
+    padding: 66px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-me__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.about-me__name {
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 58px;
+    margin: 0 0 18px;
+    letter-spacing: -0.04em;
+}
+
+.about-me__profession {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0;
+    margin: 0 0 26px;
+    padding: 0;
+}
+
+.about-me__text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+.about-me__avatar {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.about-me__git-link {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: -0.04em;
+    text-align: bottom;
+    text-decoration: none;
+    color: white;
+    transition: opacity .3s ease-in;
+    opacity: 1;
+}
+
+.about-me__git-link:hover{
+    opacity: .7;
+}
+
+@media screen and (max-width: 768px){
+    .about-me{
+        max-width: 668px;
+        margin: 0 50px;
+        padding: 90px 0;
+    }
+
+    .about-me__name{
+        font-size: 40px;
+        line-height: 40px;
+        margin: 0 0 16px;
+    }
+
+    .about-me__profession{
+        font-size: 12px;
+        line-height: 18px;
+        margin: 0 0 20px;
+    }
+
+    .about-me__text{
+        font-size: 12px;
+        line-height: 18px;
+        margin-right: 49px;
+    }
+
+    .about-me__git-link{
+        margin-top: 87px;
+    }
+
+    .about-me__avatar{
+        width: 255px;
+        height: 307px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .about-me__main{
+        max-width: 364px;
+    }
+    
+    .about-me__name{
+        font-size: 30px;
+        line-height: 36px;
+        margin: 0 0 20px;
+        padding: 70px 0;
+    }
+
+    .about-me__profession{
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .about-me__text{
+        font-size: 11px;
+        line-height: 16px;
+        margin-right: 0;
+    }
+
+    .about-me__git-link{
+        margin-top: 40px;
+    }
+
+    .about-me__info{
+        flex-direction: column-reverse;
+    }
+
+    .about-me__avatar{
+        margin: 0 auto 40px;
+    }
+}   
+
+@media screen and (max-width: 320px){
+    .about-me{
+        max-width: 292px;
+        margin: 0 auto;
+        padding: 70px 0;
+    }
+
+    .about-me__title{
+        font-size: 18px;
+        line-height: 21.78px;
+        padding-bottom: 28px;
+    }
+
+    .about-me__info{
+        padding: 60px 0 0;
+    }
+
+    .about-me__avatar{
+        width: 292px;
+        height: 352px;
+    }
+
+    .about-me__name{
+        padding: 0;
+    }
+}
+
