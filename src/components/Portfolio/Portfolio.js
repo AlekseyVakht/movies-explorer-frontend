@@ -7,7 +7,7 @@ function Portfolio(){
             <h2 className="portfolio__header">Портфолио</h2>
             <ul className="portfolio__links-list">
                 <li className="portfolio__links-list-item">
-                    <a href="https://github.com/AlekseyVakht/how-to-learn" className="portfolio__link" target="_blank" rel="noopener noreferrer">
+                    <a href="https://alekseyvakht.github.io/how-to-learn" className="portfolio__link" target="_blank" rel="noopener noreferrer">
                         <p className="portfolio__link-text">Статичный сайт</p>
                         <div className="portfolio__link-arrow"></div>
                     </a>
